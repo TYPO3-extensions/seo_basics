@@ -164,7 +164,9 @@ class tx_seobasics_modfunc1 extends t3lib_extobjbase {
 			$tree->addField('tx_seo_titletag', 1);
 			$tree->addField('keywords', 1);
 			$tree->addField('description', 1);
-			$tree->addField('tx_realurl_pathsegment',1);
+			if (t3lib_extMgm::isLoaded('realurl')) {
+				$tree->addField('tx_realurl_pathsegment', 1);
+			}
 			$tree->init('AND '.$GLOBALS['BE_USER']->getPagePermsClause(1));
 
 
@@ -372,7 +374,7 @@ class tx_seobasics_modfunc1 extends t3lib_extobjbase {
 		}
 
 		if ($this->sysHasLangs) {
-			array_unshift($row1, '<td '.($cmd == 'edit' ? 'rowspan="2"' : '').'><img'.t3lib_iconWorks::skinImg($GLOBALS['BACK_PATH'], $this->sysLanguages[$item['sys_language']]['flagIcon']).' alt="" /></td>');
+			array_unshift($row1, '<td '.($cmd == 'edit' ? 'rowspan="2"' : '').'>' . t3lib_iconWorks::getSpriteIcon($this->sysLanguages[$item['sys_language']]['flagIcon']) . ' alt="" /></td>');
 		}
 		if ($rowTitle) {
 			array_unshift($row1, $rowTitle);

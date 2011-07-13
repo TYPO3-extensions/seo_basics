@@ -1,7 +1,13 @@
+2011-07-13  Benjamin Mack  <benni@typo3.org>
+
+	* Fixed dependency to RealURL in the info module (Thanks to Robert Heel)
+
 2011-07-08  Benjamin Mack  <benni@typo3.org>
 
+	* Release of seo_basics 0.8.0
 	* Improvements to the canonical tag
  	* Improvements to the sitemap and multi-domain setup
+	* Fixed ext_tables.sql (Thanks to Marcel Zweifel)
 
 2011-04-16  Benjamin Mack  <benni@typo3.org>
 
