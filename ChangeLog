@@ -1,5 +1,6 @@
 2011-07-28  Benjamin Mack  <benni@typo3.org>
 
+	* Module: Allow possibility to hide sysfolders in the overview (Thanks to Maarten Mandemaker)
 	* Sitemap: Added hook for adding additional URLs (Thanks to Claus Harup)
 	* Sitemap: Made Sitemap valid if XHTML cleaning is enabled (Thanks to Klaus Weidenbach)
 	* Added dependency on RealURL (Thanks to Radu Dumbraveanu)

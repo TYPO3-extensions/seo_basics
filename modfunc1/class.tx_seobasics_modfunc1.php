@@ -99,6 +99,8 @@ class tx_seobasics_modfunc1 extends t3lib_extobjbase {
 			),
 			'lang' => $langs,
 			'hideShortcuts' => '',
+			'hideSysFolders' => '',
+			'hideNotInMenu' => '',
 			'hideDisabled' => ''
 		);
 	}
@@ -146,7 +148,10 @@ class tx_seobasics_modfunc1 extends t3lib_extobjbase {
 			$content .= '<label for="SET[hideShortcuts]">Hide Shortcuts</label>&nbsp;&nbsp;'; 
 			$content .= t3lib_BEfunc::getFuncCheck($id, 'SET[hideDisabled]', $this->pObj->MOD_SETTINGS['hideDisabled'], 'index.php', '', 'id="SET[hideDisabled]"');
 			$content .= '<label for="SET[hideDisabled]">Hide Disabled Pages</label>&nbsp;&nbsp;<br/>'; 
-
+			$content .= t3lib_BEfunc::getFuncCheck($id, 'SET[hideSysFolders]', $this->pObj->MOD_SETTINGS['hideSysFolders'], 'index.php', '', 'id="SET[hideSysFolders]"');
+			$content .= '<label for="SET[hideSysfolders]">Hide System Folders</label>&nbsp;&nbsp;<br/>'; 	
+			$content .= t3lib_BEfunc::getFuncCheck($id, 'SET[hideNotInMenu]', $this->pObj->MOD_SETTINGS['hideNotInMenu'], 'index.php', '', 'id="SET[hideNotInMenu]"');
+			$content .= '<label for="SET[hideNotInMenu]">Hide Not in menu</label>&nbsp;&nbsp;<br/>'; 				
 
 				// Save previous editing when submit was hit
 			$this->saveChanges();
@@ -218,6 +223,9 @@ class tx_seobasics_modfunc1 extends t3lib_extobjbase {
 		$cmd           = t3lib_div::_GP('cmd');
 		$hideShortcuts = ($this->pObj->MOD_SETTINGS['hideShortcuts'] == '1' ? true : false);
 		$hideDisabled  = ($this->pObj->MOD_SETTINGS['hideDisabled']  == '1' ? true : false);
+		$hideSysFolders  = ($this->pObj->MOD_SETTINGS['hideSysFolders']  == '1' ? true : false);
+		$hideNotInMenu  = ($this->pObj->MOD_SETTINGS['hideNotInMenu']  == '1' ? true : false);
+
 
 		// Traverse tree
 		$output = '';
@@ -234,6 +242,12 @@ class tx_seobasics_modfunc1 extends t3lib_extobjbase {
 			if ($hideShortcuts && ($item['doktype'] == 3 || $item['doktype'] == 4 || $item['doktype'] == 199)) {
 				continue;
 			}
+			if ($hideNotInMenu && $item['nav_hide'] == 1) {
+				continue;
+			}			
+			if ($hideSysFolders && $item['doktype'] == 254) {
+				continue;
+			}		
 
 
 				// load translations for this record
