@@ -73,7 +73,7 @@ class tx_seobasics_sitemap {
 			}
 		}
 
-		if ($baseURL && !strpos('://', $baseURL)) {
+		if ($baseURL && strpos($baseURL, '://') === FALSE) {
 			$baseURL = 'http://' . $baseURL;
 		}
 
