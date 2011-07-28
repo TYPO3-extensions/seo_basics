@@ -1,5 +1,6 @@
 2011-07-28  Benjamin Mack  <benni@typo3.org>
 
+	* Added dependency on RealURL (Thanks to Radu Dumbraveanu)
 	* Sitemap: Support for multiple languages / different sitemaps (Thanks to Benjamin Bergmann)
 	* Sitemap: Fixed problem with subpages of sysfolders (Thanks to Benjamin Bergmann)
 	* Sitemap: Fixed small visibility for class property
