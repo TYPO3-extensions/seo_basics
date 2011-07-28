@@ -176,7 +176,18 @@ class tx_seobasics_sitemap {
 	</url>';
 		}
 
-		// see https://www.google.com/webmasters/tools/docs/en/protocol.html for complete format
+			// hook for adding additional urls
+		if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seo_basics']['sitemap']['additionalUrlsHook'])) {
+			$_params = array(
+				'content' => &$content,
+				'usedUrls' => &$usedUrls,
+			);
+			foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seo_basics']['sitemap']['additionalUrlsHook'] as $_funcRef) {
+				t3lib_div::callUserFunction($_funcRef, $_params, $this);
+			}
+		}
+
+			// see https://www.google.com/webmasters/tools/docs/en/protocol.html for complete format
 		$content =
 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'.$content.'
 </urlset>';

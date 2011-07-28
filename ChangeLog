@@ -1,5 +1,6 @@
 2011-07-28  Benjamin Mack  <benni@typo3.org>
 
+	* Sitemap: Added hook for adding additional URLs (Thanks to Claus Harup)
 	* Sitemap: Made Sitemap valid if XHTML cleaning is enabled (Thanks to Klaus Weidenbach)
 	* Added dependency on RealURL (Thanks to Radu Dumbraveanu)
 	* Sitemap: Support for multiple languages / different sitemaps (Thanks to Benjamin Bergmann)
