@@ -1,5 +1,6 @@
 2011-07-28  Benjamin Mack  <benni@typo3.org>
 
+	* Sitemap: Fixed small visibility for class property
 	* Sitemap: Fixed double http:// in Sitemap URLs (Thanks to Oliver Rompcik)
 
 2011-07-13  Benjamin Mack  <benni@typo3.org>

@@ -32,7 +32,7 @@
 require_once(PATH_t3lib.'class.t3lib_pagetree.php');
 
 class tx_seobasics_sitemap {
-	var $conf;
+	protected $conf;
 
 
 	/**
