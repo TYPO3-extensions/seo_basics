@@ -1,5 +1,6 @@
 2011-07-28  Benjamin Mack  <benni@typo3.org>
 
+	* Sitemap: Made Sitemap valid if XHTML cleaning is enabled (Thanks to Klaus Weidenbach)
 	* Added dependency on RealURL (Thanks to Radu Dumbraveanu)
 	* Sitemap: Support for multiple languages / different sitemaps (Thanks to Benjamin Bergmann)
 	* Sitemap: Fixed problem with subpages of sysfolders (Thanks to Benjamin Bergmann)
