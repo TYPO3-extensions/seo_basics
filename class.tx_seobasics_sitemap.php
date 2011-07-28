@@ -118,10 +118,13 @@ class tx_seobasics_sitemap {
 		$tree = t3lib_div::makeInstance('t3lib_pageTree');
 		$tree->addField('SYS_LASTCHANGED', 1);
 		$tree->addField('crdate', 1);
+			// remove "hide-in-menu" items
+			// be aware: currently, this also removes the subpages that are below the hide-in-menu pages
+			// but it's currently wanted by design
 		if ($this->conf['renderHideInMenu'] != 1) {
 			$addWhere = ' AND doktype != 5 AND nav_hide = 0';
 		}
-		$tree->init('AND deleted = 0 AND no_search = 0 AND hidden = 0 AND (starttime = 0 OR starttime > NOW()) AND (endtime = 0 OR endtime < NOW()) AND doktype NOT IN (199, 254, 255) '.$addWhere);
+		$tree->init('AND no_search = 0 ' . $addWhere . $GLOBALS['TSFE']->sys_page->enableFields('pages'));
 
 
 			// create the tree from starting point
@@ -136,15 +139,21 @@ class tx_seobasics_sitemap {
 
 		foreach ($treeRecords as $row) {
 			$item = $row['row'];
+				// don't render spacers, sysfolders etc
+			if ($item['doktype'] >= 199) {
+				continue;
+			}
 			$conf = array(
 				'parameter' => $item['uid']
 			);
+				// also allow different languages
+			if (!empty($GLOBALS['TSFE']->sys_language_uid)) {
+				$conf['additionalParams'] = '&L=' . $GLOBALS['TSFE']->sys_language_uid;
+			}
 
-#			$link = $GLOBALS['TSFE']->tmpl->linkData($item, '', 0, '');
-#			$url  = $link['totalURL'];
+				// create the final URL
 			$url  = $GLOBALS['TSFE']->cObj->typoLink_URL($conf);
 			$urlParts = parse_url($url);
-//			if ($item['doktype'] == 1 || strpos($url, '://') === FALSE) {
 			if (!$urlParts['host']) {
 				$url = $baseURL . ltrim($url, '/');
 			}
@@ -157,7 +166,7 @@ class tx_seobasics_sitemap {
 
 			$lastmod = ($item['SYS_LASTCHANGED'] ? $item['SYS_LASTCHANGED'] : $item['crdate']);
 
-			// format date, see http://www.w3.org/TR/NOTE-datetime for possible formats
+				// format date, see http://www.w3.org/TR/NOTE-datetime for possible formats
 			$lastmod = date('c', $lastmod);
 
 			$content .= '
